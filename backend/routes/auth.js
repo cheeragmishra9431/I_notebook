@@ -3,7 +3,7 @@ const router=express.Router();
 const User=require('../models/User');
 const { body, validationResult } = require('express-validator');
 
-//Create a user using :POST " /api/auth/". doesnt require auth
+//Create a user using :POST " /api/auth/". doesnt require auth. No login reequired
 router.post('/',[body('name',"Enter a valid name").isLength({min:3}),body('email',"Enter a valid email").isEmail(),body('password', "Enter a password at least of 5 characters").isLength({ min: 5 }),
 ], (req, res)=>{
     const errors = validationResult(req);
@@ -14,7 +14,9 @@ router.post('/',[body('name',"Enter a valid name").isLength({min:3}),body('email
         name: req.body.name,
         password: req.body.password,
         email: req.body.email
-      }).then(user => res.json(user));
+      }).then(user => res.json(user))
+      .catch(err=>console.log(err))
+      res.json({error:'please enter unique value for email'})
     // res.send(req.body);
 })
 module.exports=router 
