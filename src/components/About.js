@@ -1,12 +1,15 @@
 import React, { useContext, useEffect } from 'react'
-import noteContext from '../context/notes/NoteContext'
+// import noteContext from '../context/notes/NoteContext'
 const About = () => {
-    const a= useContext(noteContext)
-    useEffect(() => {
-        a.update()}, [])
+    // const a= useContext(noteContext)
+    // useEffect(() => {
+    //     a.update()}, [])
+    //     //eslint-disable-next-line
+
     return (
         <div>
-            this is about {a.state.name} and he is class {a.state.class}
+            {/* // a.state is used because the object in inside state    {a.state.name was used earlier} */}
+            this is about page 
         </div>
     )
 }

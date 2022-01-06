@@ -18,7 +18,8 @@ function App() {
     <Router>
 
     <Navbar/>
-      
+      <div className="container">
+
       <Routes>
           <Route exact path="/">
             <Home />
@@ -28,6 +29,7 @@ function App() {
           </Route>
           
         </Routes>
+      </div>
     </Router>
     </NoteState>
     </>
