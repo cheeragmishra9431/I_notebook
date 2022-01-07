@@ -48,9 +48,36 @@ const NoteState=(props)=>{
           "__v": 0
         },
       ]
+      
       const [notes, setNotes] = useState(notesInitial)
+      //add a note
+      const addNote=(title, description, tag)=>{
+        //todo api call
+        const note={
+          "_id": "61d5d05b5b2ab47792ebdfd209b",
+          "user": "61d407d85076e4f2ffcb4166",
+          "title":title,
+          "description": description,
+          "tag": tag,
+          "date": "2022-01-05T17:07:39.522Z",
+          "__v": 0
+        };
+        setNotes(notes.concat(note))
+      }
+      // delete a node
+      const deleteNote=()=>{
+        console.log("deleting the node with id")
+      }
+      // edit a note
+      const editNote=()=>{
+
+      }
+
+
     // here in value modern js is used which wraps the object instead of writing {state:state, update:update}
-    return (<NoteContext.Provider value={{notes,setNotes}}>  
+      
+      
+        return (<NoteContext.Provider value={{notes,addNote,deleteNote,editNote}}>  
         {props.children}
     </NoteContext.Provider>)
 }
