@@ -38,6 +38,8 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
     });
+    const json=await response.json();
+    console.log(json);
     // return response.json(); // parses JSON response into native JavaScript objects
     // const json=response.json();
     const note = {
@@ -66,7 +68,8 @@ const NoteState = (props) => {
       
     });
     // return response.json(); // parses JSON response into native JavaScript objects
-    const json = response.json();
+    const json =await response.json();
+    console.log(json);
 
     console.log(`deleting the node with id ${id}`);
     const newnotes = notes.filter((notes1) => {
@@ -78,7 +81,7 @@ const NoteState = (props) => {
   const editNote = async (id, title, description, tag) => {
     //API call
     const response = await fetch(`${host}/api/notes/update/${id}`, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      method: "PUT", // *GET, POST, PUT, DELETE, etc.
 
       headers: {
         "Content-Type": "application/json",
@@ -89,17 +92,20 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
     });
     // return response.json(); // parses JSON response into native JavaScript objects
-    const json = response.json();
-
+    const json =await  response.json();
+    console.log(json);
+    let newNotes=JSON.parse(JSON.stringify(notes));
     //Logic to edit client
     for (let index = 0; index < notes.length; index++) {
-      const element = notes[index];
+      const element = newNotes[index];
       if (element._id === id) {
-        element.title = title;
-        element.tag = tag;
-        element.description = description;
+        newNotes[index].title = title;
+        newNotes[index].tag = tag;
+        newNotes[index].description = description;
+        break;
       }
     }
+    setNotes(newNotes);
   };
 
   // here in value modern js is used which wraps the object instead of writing {state:state, update:update}
