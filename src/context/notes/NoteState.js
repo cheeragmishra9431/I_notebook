@@ -38,20 +38,9 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
     });
-    const json=await response.json();
-    console.log(json);
-    // return response.json(); // parses JSON response into native JavaScript objects
-    // const json=response.json();
-    const note = {
-      _id: "61d5d05b5b2ab47792ebdfd209b",
-      user: "61d407d85076e4f2ffcb4166",
-      title: title,
-      description: description,
-      tag: tag,
-      date: "2022-01-05T17:07:39.522Z",
-      __v: 0,
-    };
-    // setNotes(notes.concat(note));
+    const note=await response.json();
+    setNotes(notes.concat(note));
+    
   };
   // delete a node
   const deleteNote = async (id) => {

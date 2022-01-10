@@ -20,6 +20,7 @@ const Notes = () => {
   const handleClick=(e)=>{
     editNote(note.id, note.etitle, note.edescription,note.etag )
     console.log("updating the note", note);
+    
 
     refClose.current.click();
     // addNote(note.title, note.description, note.tag);
@@ -58,7 +59,7 @@ const onChange=(e)=>{
               <button
                 type="button"
                 className="close"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
                 aria-label="Close"
               >
                 <span aria-hidden="true">&times;</span>
@@ -78,6 +79,8 @@ const onChange=(e)=>{
                     name="etitle"
                     aria-describedby="emailHelp"
                     onChange={onChange}
+                    minLength={5}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -91,6 +94,8 @@ const onChange=(e)=>{
                     name="edescription"
                     id="edescription"
                     onChange={onChange}
+                    minLength={5}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -104,6 +109,8 @@ const onChange=(e)=>{
                     name="etag"
                     id="etag"
                     onChange={onChange}
+                    minLength={5}
+                    required
                   />
                 </div>
 
@@ -115,19 +122,22 @@ const onChange=(e)=>{
                 ref={refClose}
                 type="button"
                 className="btn btn-secondary"
-                data-dismiss="modal"
+                data-bs-dismiss="modal"
               >
                 Close
               </button>
-              <button ref={refClose} type="button" onClick={handleClick} className="btn btn-primary">
+              <button disabled={note.etitle.length<5 || note.edescription.length<5} type="button" onClick={handleClick} className="btn btn-primary">
                 Update note
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div className="row my-3">
+      <div className="container row my-3">
         <h1>Your notes</h1>
+        <div className="container">
+        {notes.length===0 && '  No notes to display'  }
+        </div>
         {notes.map((notes) => {
           return (
             <NoteItem key={notes._id} updateNote={updateNote} note={notes} />
