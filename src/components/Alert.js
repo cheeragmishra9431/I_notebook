@@ -1,12 +1,10 @@
-import React from "react";
+import React from 'react'
 
-export const Alert = (props) => {
-  return (
-    <div>
-      <div className="alert alert-primary" role="alert">
-        {props.message}
-        
-      </div>
-    </div>
-  );
-};
+export default function Alert(props) {
+    return (// here shortcircuiting has happened
+        props.alert && <div className={`alert alert-${props.alert.type} alert-dismissible fade show role="alert"`}>
+            {props.alert.msg}
+            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    )
+}
